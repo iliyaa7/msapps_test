@@ -1,3 +1,3 @@
-export default function changeIsPopupCategoryOpen() {
-  return { type: 'CHANGE_ISPOPUPCATEGORYOPEN' }
+export default function changeIsPopupCategoryOpen(currentState) {
+  return { type: 'CHANGE_ISPOPUPCATEGORYOPEN', payload: currentState }
 }

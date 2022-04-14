@@ -22,7 +22,7 @@ function ImagesCardList(props) {
       <p className='card-list__description'>For more information click on the image</p>
       <ul className='card-list__container'>
         {ImagesToRender.map(card => (
-          <li className='card-list__item' key={card.id}><Card card={card}/></li>
+          <li className='card-list__item' key={card.id}><Card handleImageClick={props.handleImageClick} card={card}/></li>
         ))}
       </ul>
     </section>
