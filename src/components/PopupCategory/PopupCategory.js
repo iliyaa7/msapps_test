@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { options } from './consts'
 
 function PopupCategory(props) {
-  const [categoryToSearch, setCategoryToSearch] = React.useState()
+  const [categoryToSearch, setCategoryToSearch] = React.useState('')
   const { isPopupCategoryOpen } = useSelector(state => state);
 
   function handleSubmit(e) {
@@ -24,7 +24,7 @@ function PopupCategory(props) {
           <label className='popup-form__input-title'>Select your category</label>
           <select onChange={handleCategoryChange} value={categoryToSearch} className='popup-form__input'>
             {options.map((option) => (
-                  <option key={option.value} value={option.value}>{option.label}</option>
+                  <option selected={option.selected} key={option.value} value={option.value}>{option.label}</option>
                 ))}
           </select>
           <button className='popup-form__submit'>Search this category</button>

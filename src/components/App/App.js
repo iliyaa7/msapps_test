@@ -5,7 +5,7 @@ import ImagesCardList from '../ImagesCardList/ImagesCardList';
 import PopupCategory from '../PopupCategory/PopupCategory';
 import pixApi from '../../utills/MailApi';
 import { useDispatch } from 'react-redux'
-import changeCurrentCategoty from '../../actions/changeCurrentCategory';
+import changeImagesToRender from '../../actions/changeImagesToRender';
 import changeIsPopupCategoryOpen from '../../actions/changeIsPopupCategoryOpen';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   React.useEffect(() => {
     pixApi.getCategory(category)
     .then((res) => {
-      dispatch(changeCurrentCategoty(res.hits));
+      dispatch(changeImagesToRender(res.hits));
     })
     .catch((err) => console.log((err)));
   },[dispatch, category]);
@@ -36,9 +36,16 @@ function App() {
 
   return(
     <main className='main-container'>
-      <PopupCategory handleCategorySubmit={handleCategorySubmit} category={category} onClose={closeAllPopups}/>
+      <PopupCategory
+        handleCategorySubmit={handleCategorySubmit}
+        initialCategory={category}
+        onClose={closeAllPopups}
+      />
       <Header/>
-      <ImagesCardList category={category} handleCategoryClick={handleCategoryClick}/>
+      <ImagesCardList
+        currentCategory={category}
+        handleCategoryClick={handleCategoryClick}
+      />
     </main>
   )
 }

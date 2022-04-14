@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import currentCategory from './currentCategory';
+import ImagesToRender from './ImagesToRender';
 import isPopupCategoryOpen from "./isPopupCategoryOpen";
 
 
 
 export default combineReducers({
-  currentCategory, isPopupCategoryOpen,
+  ImagesToRender, isPopupCategoryOpen,
 });
