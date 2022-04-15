@@ -6,7 +6,6 @@ import PopupCategory from '../PopupCategory/PopupCategory';
 import PopupInfo from '../PopupInfo/PopupInfo';
 import pixApi from '../../utills/MailApi';
 import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
 import changeImagesToRender from '../../actions/changeImagesToRender';
 import changeIsPopupCategoryOpen from '../../actions/changeIsPopupCategoryOpen';
 import changeIsPopupInfoOpen from '../../actions/changeIspopupInfoOpen';
@@ -14,16 +13,32 @@ import changeCurrentImage from '../../actions/changeCurrentImage';
 
 function App() {
   const [category, setCategory] = React.useState('dogs');
+  const [pageNum, setPageNum] = React.useState(1);
+  const [isPrevDisabled, setIsPrevDisabled] = React.useState(true);
+  const [isNextDisabled, setIsNextDisabled] = React.useState(false);
   const dispatch = useDispatch();
-  const { isPopupInfoOpen } = useSelector(state => state);
 
   React.useEffect(() => {
-    pixApi.getCategory(category)
+    if(pageNum === 1) setIsPrevDisabled(true);
+    if(pageNum !== 1) setIsPrevDisabled(false);
+  },[setIsPrevDisabled, pageNum]);
+
+  React.useEffect(() => {
+    pixApi.getCategory(category, pageNum)
     .then((res) => {
+      
       dispatch(changeImagesToRender(res.hits));
     })
     .catch((err) => console.log((err)));
-  },[dispatch, category]);
+  },[dispatch, category, pageNum]);
+
+  function handlePrevCLick() {
+    setPageNum(pageNum - 1)
+  }
+
+  function handleNextCLick() {
+    setPageNum(pageNum + 1)
+  }
 
   function handleCategorySubmit(newCategory) {
     setCategory(newCategory);
@@ -58,6 +73,10 @@ function App() {
         currentCategory={category}
         handleCategoryClick={handleCategoryClick}
         handleImageClick={handleImageClick}
+        handlePrevCLick={handlePrevCLick}
+        handleNextCLick={handleNextCLick}
+        isPrevDisabled={isPrevDisabled}
+        isNextDisabled={isNextDisabled}
       />
     </main>
   )

@@ -21,12 +21,14 @@ function PopupCategory(props) {
     <>
       <Popup onClose={props.onClose} isOpen={isPopupCategoryOpen}>
         <form className='popup-form' onSubmit={handleSubmit}>
-          <label className='popup-form__input-title'>Select your category</label>
-          <select onChange={handleCategoryChange} value={categoryToSearch} className='popup-form__input'>
-            {options.map((option) => (
-                  <option selected key={option.value} value={option.value}>{option.label}</option>
-                ))}
-          </select>
+          <div className='popup-form__select-container'>
+            <label className='popup-form__input-title'>Select a category to search:</label>
+            <select onChange={handleCategoryChange} value={categoryToSearch} className='popup-form__input'>
+              {options.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+            </select>
+          </div>
           <button className='popup-form__submit'>Search this category</button>
         </form>
       </Popup>

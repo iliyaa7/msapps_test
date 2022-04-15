@@ -12,10 +12,10 @@ function PopupInfo(props) {
       <Popup onClose={props.onClose} isOpen={isPopupInfoOpen}>
         <div className='popup-info'>
           <img src={currentImage.largeImageURL} className='popup-info__image' alt={currentImage.tags}/>
-          <p className='popup-info__text'></p>
-          <p className='popup-info__text'></p>
-          <p className='popup-info__text'></p>
-          <p className='popup-info__text'></p>
+          <p className='popup-info__text'>{`Views: ${currentImage.views}`}</p>
+          <p className='popup-info__text'>{`Collections: ${currentImage.collections}`}</p>
+          <p className='popup-info__text'>{`Downloads: ${currentImage.downloads}`}</p>
+          <p className='popup-info__text'>{`Likes: ${currentImage.likes}`}</p>
         </div>
       </Popup>
     </>

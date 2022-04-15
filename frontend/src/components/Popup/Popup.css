@@ -42,12 +42,13 @@
   background-color: transparent;
   border: transparent;
   transition: opacity .2s linear;
-  margin-left: 470px;
+  margin-left: 390px;
 }
 
 .popup__container {
   background-color: white;
-  width: 430px;
+  width: 95%;
+  max-width: 350px;
   border-radius: 10px;
   z-index: 2;
   max-height: 513px;

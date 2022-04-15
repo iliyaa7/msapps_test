@@ -7,8 +7,8 @@ class Api {
   constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
   }
-  getCategory(category) {
-    return fetchFunction(`${this._baseUrl}/api/?key=${apiKey}&q=${category}`, {
+  getCategory(category, pageNum) {
+    return fetchFunction(`${this._baseUrl}/api/?key=${apiKey}&q=${category}&page=${pageNum}&per_page=9`, {
       method: "GET",
     });
   }
