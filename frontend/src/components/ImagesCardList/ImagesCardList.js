@@ -7,23 +7,24 @@ function ImagesCardList(props) {
 
   const { ImagesToRender } = useSelector(state => state);
 
-  // React.useEffect(() => {
-  //   console.log(currentCategory);
-  // }, [currentCategory]);
-
   return(
     <section className='card-list'>
       <h3 className='card-list__title'>{props.currentCategory.toUpperCase()}</h3>
       <p className='card-list__description'>Click on the image to get more information</p>
       <div className='card-list__buttons-container'>
         <button
-          className={`card-list__button ${props.isPrevDisabled && 'card-list__button_type_disabled'}`}
+          className={`card-list__button ${props.isPrevBtnDisabled && 'card-list__button_type_disabled'}`}
           onClick={props.handlePrevCLick}
-          disabled={props.isPrevDisabled}>
+          disabled={props.loading || props.isPrevBtnDisabled}>
           Prev
         </button>
         <button className='card-list__button' onClick={props.handleCategoryClick}>Change Category</button>
-        <button className={`card-list__button ${props.isNextDisabled && 'card-list__button_type_disabled'}`} onClick={props.handleNextCLick}>Next</button>
+        <button
+          className={`card-list__button ${props.isNextBtnDisabled && 'card-list__button'}`}
+          onClick={props.handleNextCLick}
+          disabled={props.loading || props.isNextBtnDisabled}>
+            Next
+          </button>
       </div>
       <ul className='card-list__container'>
         {ImagesToRender.map(card => (

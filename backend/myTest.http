@@ -19,8 +19,7 @@ Content-Type: application/json
 
 ###
 
-get http://50.19.53.207/articles
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ0NjEwMDY4ZmEzZDFkYjFmYjA2MzQiLCJpYXQiOjE2NDg2NDg0NjIsImV4cCI6MTY0OTI1MzI2Mn0.7ScKRTjkKS416fPds6wySLNyFkCAWO4eF3rHjIfS6gE
+get http://localhost:3000/images?category=dogs&pageNum=1&perPage=9
 
 ###
 

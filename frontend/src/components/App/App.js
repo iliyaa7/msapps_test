@@ -14,22 +14,32 @@ import changeCurrentImage from '../../actions/changeCurrentImage';
 function App() {
   const [category, setCategory] = React.useState('dogs');
   const [pageNum, setPageNum] = React.useState(1);
-  const [isPrevDisabled, setIsPrevDisabled] = React.useState(true);
-  const [isNextDisabled, setIsNextDisabled] = React.useState(false);
+  const [isPrevBtnDisabled, setIsPrevBtnDisabled] = React.useState(true);
+  const [isNextBtnDisabled, setIsNextBtnDisabled] = React.useState(false);
+  const [maxPage, setMaxPage] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if(pageNum === 1) setIsPrevDisabled(true);
-    if(pageNum !== 1) setIsPrevDisabled(false);
-  },[setIsPrevDisabled, pageNum]);
+    const nextBtnState = pageNum >= maxPage;
+    setIsNextBtnDisabled(nextBtnState);
+  },[maxPage, pageNum]);
 
   React.useEffect(() => {
-    pixApi.getCategory(category, pageNum)
+    const nextBtnState = pageNum <= 1;
+    setIsPrevBtnDisabled(nextBtnState);
+  },[pageNum]);
+
+  React.useEffect(() => {
+    const perPage = 9;
+    setLoading(true);
+    pixApi.getCategory(category, pageNum, perPage)
     .then((res) => {
-      
-      dispatch(changeImagesToRender(res.hits));
+      dispatch(changeImagesToRender(res.data.hits));
+      setMaxPage(res.maxPages);
     })
-    .catch((err) => console.log((err)));
+    .catch((err) => console.log((err)))
+    .finally(() => setLoading(false));
   },[dispatch, category, pageNum]);
 
   function handlePrevCLick() {
@@ -42,6 +52,7 @@ function App() {
 
   function handleCategorySubmit(newCategory) {
     setCategory(newCategory);
+    setPageNum(1);
     closeAllPopups();
   }
 
@@ -70,13 +81,15 @@ function App() {
       <PopupInfo onClose={closeAllPopups}/>
       <Header/>
       <ImagesCardList
-        currentCategory={category}
+        maxPage={maxPage}
+        currentCategory={`${category} ${pageNum}`}
         handleCategoryClick={handleCategoryClick}
         handleImageClick={handleImageClick}
         handlePrevCLick={handlePrevCLick}
         handleNextCLick={handleNextCLick}
-        isPrevDisabled={isPrevDisabled}
-        isNextDisabled={isNextDisabled}
+        isPrevBtnDisabled={isPrevBtnDisabled}
+        isNextBtnDisabled={isNextBtnDisabled}
+        loading={loading}
       />
     </main>
   )

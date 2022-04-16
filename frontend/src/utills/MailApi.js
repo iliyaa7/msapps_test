@@ -7,8 +7,8 @@ class Api {
   constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
   }
-  getCategory(category, pageNum) {
-    return fetchFunction(`${this._baseUrl}/api/?key=${apiKey}&q=${category}&page=${pageNum}&per_page=9`, {
+  getCategory(category, pageNum, perPage) {
+    return fetchFunction(`${this._baseUrl}/images?category=${category}&pageNum=${pageNum}&perPage=${perPage}`, {
       method: "GET",
     });
   }
@@ -16,7 +16,7 @@ class Api {
 
 }
 const pixApi = new Api({
-  baseUrl: "https://pixabay.com"
+  baseUrl: "http://localhost:3000"
 });
 
 
