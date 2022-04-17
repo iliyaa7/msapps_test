@@ -75,3 +75,33 @@
 }
 
 
+
+
+/* media quries */
+
+@media only screen and (max-width: 600px){
+  .card-list__title {
+    margin-top: 25px;
+    font-size: 35px;
+    line-height: 37px;
+    letter-spacing: 0.45rem;
+  }
+
+  .card-list__description {
+    font-size: 11px;
+    line-height: 14px;
+  }
+
+  .card-list__container {
+    row-gap: 5px;
+    column-gap: 5px;
+  }
+
+  .card-list__button {
+    margin: 10px 0 0;
+    padding: 5px;
+    font-size: 13px;
+    line-height: 15px;
+    
+  }
+}

@@ -18,3 +18,26 @@
 .header__heading_type_right {
   margin: 0 40px 0 auto;
 }
+
+
+/* media quries */
+
+@media only screen and (max-width: 600px){
+  .header {
+    height: 60px;
+    border-bottom: solid 1px white;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header__heading {
+    margin-left: 2%;
+    font-size: 25px;
+    line-height: 28px;
+  }
+
+  .header__heading_type_right {
+    margin: 0 0 0 2%;
+  }
+
+}
