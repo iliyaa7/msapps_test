@@ -1,5 +1,4 @@
 const express = require('express');
-const { errors } = require('celebrate');
 const cors = require('cors');
 const imagesRoute = require('./routes/images');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -21,7 +20,6 @@ app.get('/crash-test', () => {
 
 app.use('/', imagesRoute);
 app.use(errorLogger);
-app.use(errors());
 app.use(centalizedErrHandler);
 app.use((req, res, next) => {
   res.status(404).send('Error 404 - Path not found on the server');

@@ -1,25 +1,29 @@
-const axios = require('axios');
-const ServerError = require('../errors/serverError')
+
+const pixbayService  = require('../service/pixabayService');
+const NotFoundError = require('../errors/not-found-err');
+
 
 module.exports.getImages = (req, res, next) => {
-
-  const { APIKEY = '25540812-faf2b76d586c1787d2dd02736' } = process.env;
-  const { category, pageNum, perPage } = req.query;
-
-  axios.get(`https://pixabay.com/api/?key=${APIKEY}&q=${category}&page=${pageNum}&per_page=${perPage}`)
-  .then(response => {
-    let maxPages = 0;
-    if(response.data?.totalHits) {
-      maxPages = Math.round(response.data.totalHits / perPage);
-    }
-    const pixabayData = {
-      data: response.data,
-      maxPages
-    }
-    res.send(pixabayData)
-  })
-  .catch(err => {
-    console.log(err)
+  pixbayService.query(req.query)
+  .then((response) => {
+    res.send(response)
   })
   .catch(next);
 }
+
+module.exports.findImageById = (req, res, next) => {
+  pixbayService.findById(req.params.id)
+  .then((response) => {
+    res.send(response)
+  })
+  // I found it very difuiclt to diagnose the error returning from pixabay.
+  // The pixabay api returned the same error response for different situations,
+  // and I couldn't be sure that there was no image with that id or the id contained invalid charecters
+  // (or any other reason)
+  // so I chose to throw this error for the client's convenience.
+  .catch(() => {
+    throw new NotFoundError('no image with that id was found')
+  })
+  .catch(next);
+}
+

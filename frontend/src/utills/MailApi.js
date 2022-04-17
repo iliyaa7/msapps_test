@@ -1,7 +1,6 @@
 import fetchFunction from "./fetchFunction";
 
 
-const apiKey = '25540812-faf2b76d586c1787d2dd02736';
 
 class Api {
   constructor({ baseUrl }) {
