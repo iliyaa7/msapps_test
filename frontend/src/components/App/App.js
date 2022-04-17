@@ -58,10 +58,8 @@ function App() {
   },[pageNum]);
 
 
-  logger(5);
-  function logger(a) {
-    console.log(a);
-  }
+
+
 
   function handlePrevCLick() {
     setPageNum(pageNum - 1)
