@@ -58,8 +58,10 @@ function App() {
   },[pageNum]);
 
 
-
-
+  logger(5);
+  function logger(a) {
+    console.log(a);
+  }
 
   function handlePrevCLick() {
     setPageNum(pageNum - 1)
@@ -83,7 +85,7 @@ function App() {
   }
 
   // The handler for opening the form popup
-  
+
   function handleCategoryClick() {
     dispatch(changeIsPopupCategoryOpen(true));
   }
